@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:provider/provider.dart";
 
-import '../provider/bill_provider.dart';
+import '../../../provider/bill_provider.dart';
 
 class Split extends StatelessWidget {
 

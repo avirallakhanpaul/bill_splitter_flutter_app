@@ -5,13 +5,21 @@ class BillProvider with ChangeNotifier {
   var billAmount = 0.0;
   var totalBillPerPerson = 0.0;
   var tip = 0.0;
-  var tipPerc = 0;
+  var contactCardCounter = 1;
   var personCounter = 1;
 
-  void setBillAmount(double value, int tipPerc) {
+  void setBillAmount(double value) {
 
     billAmount = value;
     calculateTotalPerPerson();
+    notifyListeners();
+  }
+
+  void setTipAmount(double value) {
+
+    tip = value;
+    calculateTotalPerPerson();
+
     notifyListeners();
   }
 
@@ -20,9 +28,11 @@ class BillProvider with ChangeNotifier {
     if(incOrDec == "-") {
       if(personCounter > 1) {
         personCounter--;
+        contactCardCounter--;
       }
     } else if(incOrDec == "+") {
         personCounter++;
+        contactCardCounter++;
     }
 
     calculateTotalPerPerson();
@@ -40,9 +50,9 @@ class BillProvider with ChangeNotifier {
 
   double calculateTotalPerPerson() {
 
-    double returnedTip = calculateTotalTip(tipPerc);
+    // double returnedTip = calculateTotalTip(tipPerc);
 
-    totalBillPerPerson = double.parse(((returnedTip + billAmount) / personCounter).toStringAsFixed(2));
+    totalBillPerPerson = double.parse(((tip + billAmount) / personCounter).toStringAsFixed(2));
 
     notifyListeners();
 
